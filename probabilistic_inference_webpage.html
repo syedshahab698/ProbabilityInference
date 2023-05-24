@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Understanding Probabilities: Symptoms and Diagnosis</title>
+	<style>
+		input {
+	width: 70px;
+ 	}
+	body {
+	background-color: #F3F3F3 !important;
+	}
+	.violet-div {
+	background-color: violet;
+	}
+	.cold-color {
+	background-color: #83677B;
+	}
+
+	.gray-color {
+	background-color: #A4B3B6;
+	}
+
+	.new-color {
+	background-color: #8D8741;
+	}
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+</head>
+<body>
+	<div style = "margin-left: 250px;margin-right: 250px;">
+		<h4 class = 'display-4'>Navigating Uncertainty: Exploring Probabilistic Reasoning in Expert Systems</h4>
+		<p>Welcome to the webpage on Handling Uncertainty in Expert Systems through Probabilistic Reasoning. Explore the key techniques and tables that assist in managing uncertainty. Discover the significance of contingency tables, join probabilities tables, and likelihood, prior, and posterior tables. Uncover associations, calculate joint probabilities, and estimate probabilities based on prior knowledge and observed evidence. Join us as we navigate through the realm of uncertainty and enhance decision-making in expert systems.</p>
+	</div>
+
+	<h6 class = 'text-center'>Incidence and Association: Contingency Table</h6>
+	<div class="container">
+		<div class="row">
+			
+		  <div class="col">
+			<table  class="shadow-lg p-3 mb-5 rounded table">
+				<thead class="thead-dark">
+				<tr>
+				  <th rowspan="2" >Symptoms / Diagnosis</th>
+				  <th colspan="2">Diagnosis</th>
+				  <th rowspan="2">Total</th>
+				</tr>
+				<tr>
+				  <th>Cold</th>
+				  <th>Flu</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				  <th scope="row">Symptoms</th>
+				  <td class="table-warning" >P(S, Cold)</td>
+				  <td class="table-primary">P(S, Flu)</td>
+				  <td class="new-color">P(S)</td>
+				</tr>
+				<tr>
+				  <th  scope="row">NS</th>
+				  <td class="bg-success">P(NS, Cold)</td>
+				  <td class="bg-danger">P(NS, Flu)</td>
+				  <td class="violet-div">P(NS)</td>
+				</tr>
+				<tr>
+				  <th scope="row">Total</th>
+				  <td class = "cold-color">P(Cold)</td>
+				  <td class = "gray-color">P(Flu)</td>
+				  <td></td>
+				</tr>
+			</tbody>
+			  </table>
+		  </div>
+		  <div class="col">
+			<table  class="shadow-lg p-3 mb-5 rounded table">
+				<thead class="thead-dark">
+				<tr>
+				  <th rowspan="2">Symptoms / Diagnosis</th>
+				  <th colspan="2">Diagnosis</th>
+				  <th rowspan="2">Total</th>
+				</tr>
+				<tr>
+				  <th>Cold</th>
+				  <th>Flu</th>
+				</tr>
+			</thead>
+				<tr>
+				  <th scope="row">Symptoms</th>
+				  <td><input class="table-warning" type="number" id="cold-symptoms" value="3" min="0" oninput="updateTotal()"></td>
+				  <td><input class="table-primary" type="number" id="flu-symptoms" value="5" min="0" oninput="updateTotal()"></td>
+				  <td><input class="new-color" type="number" id="total-symptoms" value = "8" readonly></td>
+				</tr>
+				<tr>
+				  <th scope="row">NS</th>
+				  <td><input class="bg-success" type="number" id="cold-ns" value="7" min="0" oninput="updateTotal()"></td>
+				  <td><input class="bg-danger" type="number" id="flu-ns" value="9" min="0" oninput="updateTotal()"></td>
+				  <td><input class="violet-div" type="number" id="total-ns" value = "16" readonly></td>
+				</tr>
+				<tr>
+				  <th scope="row">Total</th>
+				  <td><input class = "cold-color" type="number" id="total-cold" value = "10" readonly></td>
+				  <td><input class = "gray-color" type="number" id="total-flu" value = "14" readonly></td>
+				  <td><input type="number" id="grand-total" value = "24" readonly></td>
+				</tr>
+			  </table>
+		  </div>
+		</div>
+		
+	  </div>
+	  <div class = "container-fluid">
+		<div class="row" style="margin-left: 50px;margin-right: 50px;">
+			<div class="col-sm-4">
+			  <!-- <h2>Joint and Marginal Probabilities</h2> -->
+		  <table class="shadow-lg p-3 mb-5 rounded table">
+			<h6 class = 'text-center'>Probability of Joint Events: Join Probabilities Table</h6>
+			<thead class="thead-dark">
+			  <tr>
+				  <th rowspan="2">Symptoms / Diagnosis</th>
+				  <th colspan="2">Diagnosis</th>
+				  <th rowspan="2">Total</th>
+			  </tr>
+			  <tr>
+				  <th>Cold</th>
+				  <th>Flu</th>
+			  </tr>
+			</thead>
+			  <tr>
+				  <th scope="row">S</th>
+				  <td><input type="number" class="table-warning" id="cold-joint" value = "0.125" readonly></td>
+				  <td><input type="number" class="table-primary" id="flu-joint" value = "0.208" readonly></td>
+				  <td><input type="number" class="new-color" id="total-joint" value = "0.333" readonly></td>
+			  </tr>
+			  <tr>
+				  <th scope="row">NS</th>
+				  <td><input class="bg-success" type="number" id="cold-marginal" value = "0.292" readonly></td>
+				  <td><input class="bg-danger" type="number" id="flu-marginal" value = "0.375"readonly></td>
+				  <td><input class="violet-div" type="number" id="total-marginal" value = "0.667" readonly></td>
+			  </tr>
+			  <tr>
+				  <th scope="row">Total</th>
+				  <td><input class = "cold-color" type="number" id="total-cold-marginal" value = "0.417" readonly></td>
+				  <td><input class = "gray-color" type="number" id="total-flu-marginal" value = "0.583" readonly></td>
+			  <td><input type="number" id="grand-total-marginal" value = "1" readonly></td>
+		  </tr>
+		  </table >	
+			</div>
+			<div class="col-sm-8">
+				<h6 class = 'text-center'>Estimating Probabilities: Likelihood, Prior, and Posterior Table</h6>
+			  <table class="shadow-lg p-3 mb-5 rounded table table-sm">
+				<thead class="thead-dark">
+				  <tr>
+					<th colspan="4">Likelihood</th>
+					<th colspan="4">Posterior</th>
+					<th colspan="3">(Likelihood X Prior) / Total Evidence</th>
+				  </tr>
+				</thead>
+				  <tr>
+					<td rowspan="2">P(S | Cold)</td>
+					<td class="table-warning">P(S, Cold)</td>
+					<td ><input class="table-warning" type="number" id="p-s-cold-likelihood" value = "0.125" readonly></td>
+					<td rowspan="2"><input type="number" id="p-s-cold-prior" value = "0.3" readonly></td>
+					
+					<td rowspan="2">P( Cold | S)</td>
+					<td class="table-warning">P(S, Cold)</td>
+					<td ><input class="table-warning" type="number" id="p-s-cold-likelihood-2" value = "0.125" readonly></td>
+					<td rowspan="2"><input type="number" id="p-cold-s-posterior" value = "0.375" readonly></td>
+					
+					<td class="table-warning">P(S | Cold) x P(Cold)</td>
+					<td ><input class="table-warning" type="number" id="p-s-cold-cold-prior" value = "0.125" readonly></td>
+					<td rowspan="2"><input type="number" id="p-cold-s-bayes" value = "0.375" readonly></td>
+				  </tr>
+				  <tr>
+				   
+					<td class = "cold-color">P(Cold)</td>
+					<td ><input class = "cold-color" type="number" id="p-cold-prior" value = "0.417" readonly></td>
+					
+					<td class="new-color">P(S)</td>
+					<td ><input class="new-color" type="number" id="p-s-prior" value = "0.333" readonly></td>
+					
+					<td class="new-color">P(S)</td>
+					<td><input class="new-color" type="number" id="p-s-prior-2" value = "0.333" readonly></td>
+					
+				  </tr>
+				  
+				  <tr>
+					<td rowspan="2">P(NS | Cold)</td>
+					<td class="bg-success">P(NS, Cold)</td>
+					<td ><input class="bg-success" type="number" id="p-ns-cold-likelihood" value = "0.292" readonly></td>
+					<td rowspan="2"><input type="number" id="p-ns-cold-prior" value = "0.700" readonly></td>
+					
+					<td rowspan="2">P( Cold | NS)</td>
+					<td class="bg-success">P(NS, Cold)</td>
+					<td ><input class="bg-success" type="number" id="p-ns-cold-likelihood-2" value = "0.292" readonly></td>
+					<td rowspan="2"><input type="number" id="p-cold-ns-posterior" value = "0.438" readonly></td>
+					
+					<td class="bg-success">P(NS | Cold) x P(Cold)</td>
+					<td ><input type="number" class="bg-success" id="p-ns-cold-cold-prior" value = "0.292" readonly></td>
+					<td rowspan="2"><input type="number" id="p-cold-ns-bayes" value = "0.438" readonly></td>
+				  </tr>
+				  <tr>
+				   
+					<td class = "cold-color">P(Cold)</td>
+					<td ><input class = "cold-color" type="number" id="p-cold-prior-2" value = "0.417" readonly></td>
+					
+					<td class="violet-div">P(NS)</td>
+					<td ><input class="violet-div" type="number" id="p-ns-prior" value = "0.667" readonly></td>
+					
+					<td class="violet-div">P(NS)</td>
+					<td><input class="violet-div" type="number" id="p-ns-prior-2" value = "0.667" readonly></td>
+					
+				  </tr>
+			  
+				  <tr>
+					<td rowspan="2" >P(S | Flu)</td>
+					<td class="table-primary">P(S, Flu)</td>
+					<td ><input class="table-primary" type="number" id="p-s-flu-likelihood" value = "0.208" readonly></td>
+					<td rowspan="2"><input type="number" id="p-s-flu-prior" value = "0.357" readonly></td>
+					
+					<td rowspan="2">P( Flu | S)</td>
+					<td class="table-primary">P(S, Flu)</td>
+					<td ><input class="table-primary" type="number" id="p-s-flu-likelihood-2" value = "0.208" readonly></td>
+					<td rowspan="2"><input type="number" id="p-flu-s-posterior" value = "0.625" readonly></td>
+					
+					<td class="table-primary">P(S | Flu) x P(Flu)</td>
+					<td ><input class="table-primary" type="number" id="p-s-flu-flu-prior" value = "0.208" readonly></td>
+					<td rowspan="2"><input type="number" id="p-flu-s-bayes" value = "0.625" readonly></td>
+				  </tr>
+				  <tr>
+				   
+					<td class = "gray-color">P(Flu)</td>
+					<td ><input class = "gray-color" type="number" id="p-flu-prior" value = "0.583" readonly></td>
+					
+					<td class="new-color">P(S)</td>
+					<td ><input class="new-color" type="number" id="p-s-prior-3" value = "0.333" readonly></td>
+					
+					<td class="new-color">P(S)</td>
+					<td><input class="new-color" type="number" id="p-s-prior-4" value = "0.333" readonly></td>
+					
+				  </tr>
+				  
+				  <tr>
+					  <td rowspan="2">P(NS | Flu)</td>
+					  <td class="bg-danger">P(NS, Flu)</td>
+					  <td ><input class="bg-danger" type="number" id="p-ns-flu-likelihood" value = "0.375" readonly></td>
+					  <td rowspan="2"><input type="number" id="p-ns-flu-prior" value = "0.642857" readonly></td>
+					  
+					  <td rowspan="2">P( Flu | NS)</td>
+					  <td class="bg-danger">P(NS, Flu)</td>
+					  <td ><input class="bg-danger" type="number" id="p-ns-flu-likelihood-2" value = "0.375" readonly></td>
+					  <td rowspan="2"><input type="number" id="p-flu-ns-posterior" value = "0.5625" readonly></td>
+					  
+					  <td class="bg-danger">P(NS | Flu) x P(Flu)</td>
+					  <td ><input class="bg-danger" type="number" id="p-ns-flu-flu-prior" value = "0.3750" readonly></td>
+					  <td rowspan="2"><input type="number" id="p-flu-ns-bayes" value = "0.5625" readonly></td>
+					</tr>
+					<tr>
+					 
+					  <td class = "gray-color">P(Flu)</td>
+					  <td ><input class = "gray-color" type="number" id="p-flu-prior-2" value = "0.5833" readonly></td>
+					  
+					  <td class="violet-div" >P(NS)</td>
+					  <td ><input class="violet-div" type="number" id="p-ns-prior-3" value = "0.6667" readonly></td>
+					  
+					  <td class="violet-div">P(NS)</td>
+					  <td><input class="violet-div" type="number" id="p-ns-prior-4" value = "0.6667" readonly></td>
+					  
+					</tr>
+					<tr>
+					  <th colspan="4">P(X | Y)--> Likelihood</th>
+					  <th colspan="7">P(Y | X) --> Posterior</th>
+					  
+					</tr>
+				  
+			  </table>
+			</div>
+			
+		  </div>
+	  </div>
+	  
+	  <script>
+		function updateTotal() {
+		  var coldSymptoms = parseInt(document.getElementById("cold-symptoms").value);
+		  var fluSymptoms = parseInt(document.getElementById("flu-symptoms").value);
+		  var coldNS = parseInt(document.getElementById("cold-ns").value);
+		  var fluNS = parseInt(document.getElementById("flu-ns").value);
+		
+		  var totalSymptoms = coldSymptoms + fluSymptoms;
+		  var totalNS = coldNS + fluNS;
+		  var totalCold = coldSymptoms + coldNS;
+		  var totalFlu = fluSymptoms + fluNS;
+		  var grandTotal = totalSymptoms + totalNS;
+		
+		  document.getElementById("total-symptoms").value = totalSymptoms;
+		  document.getElementById("total-ns").value = totalNS;
+		  document.getElementById("total-cold").value = totalCold;
+		  document.getElementById("total-flu").value = totalFlu;
+		  document.getElementById("grand-total").value = grandTotal;
+
+      // Calculate joint probabilities
+      var jointColdSymptoms = coldSymptoms / grandTotal;
+      var jointFluSymptoms = fluSymptoms / grandTotal;
+      var jointColdNS = coldNS / grandTotal;
+      var jointFluNS = fluNS / grandTotal;
+
+      var p_cold = (jointColdSymptoms + jointColdNS)
+      var p_flu = (jointFluSymptoms + jointFluNS)
+      var p_symp = (jointColdSymptoms + jointFluSymptoms)
+      var p_no_symp = (jointColdNS + jointFluNS)
+
+      document.getElementById("cold-joint").value = jointColdSymptoms.toFixed(3);
+      document.getElementById("flu-joint").value = jointFluSymptoms.toFixed(3);
+      document.getElementById("cold-marginal").value = jointColdNS.toFixed(3);
+      document.getElementById("flu-marginal").value = jointFluNS.toFixed(3);
+      document.getElementById("total-joint").value = p_symp.toFixed(3);
+      document.getElementById("total-marginal").value = p_no_symp.toFixed(3);
+      document.getElementById("total-cold-marginal").value = p_cold.toFixed(3);
+      document.getElementById("total-flu-marginal").value = p_flu.toFixed(3);
+      document.getElementById("grand-total-marginal").value = 1;
+
+
+    
+    // Update values for Likelihood Postrior and Bayes formula
+    document.getElementById("p-s-cold-likelihood").value = jointColdSymptoms.toFixed(3);
+    document.getElementById("p-s-cold-prior").value = (jointColdSymptoms / p_cold).toFixed(3);
+    document.getElementById("p-s-cold-likelihood-2").value = jointColdSymptoms.toFixed(3);
+    document.getElementById("p-cold-s-posterior").value = (jointColdSymptoms / p_symp).toFixed(3);
+    document.getElementById("p-s-cold-cold-prior").value = ( (jointColdSymptoms / p_cold)*p_cold ).toFixed(3);
+    document.getElementById("p-cold-s-bayes").value = (((jointColdSymptoms / p_cold)*p_cold )/ p_symp ).toFixed(3);
+    document.getElementById("p-cold-prior").value = p_cold.toFixed(3);
+    document.getElementById("p-s-prior").value = p_symp.toFixed(3);
+    document.getElementById("p-s-prior-2").value = p_symp.toFixed(3);
+
+
+    document.getElementById("p-ns-cold-likelihood").value = jointColdNS.toFixed(3);
+    document.getElementById("p-ns-cold-prior").value = (jointColdNS / p_cold).toFixed(3);
+    document.getElementById("p-ns-cold-likelihood-2").value = jointColdNS.toFixed(3);
+    document.getElementById("p-cold-ns-posterior").value = (jointColdNS / p_no_symp).toFixed(3);
+    document.getElementById("p-ns-cold-cold-prior").value = ( (jointColdNS / p_cold)*p_cold ).toFixed(3);
+    document.getElementById("p-cold-ns-bayes").value = (((jointColdNS / p_cold)*p_cold )/ p_no_symp ).toFixed(3);
+    document.getElementById("p-cold-prior-2").value = p_cold.toFixed(3);
+    document.getElementById("p-ns-prior").value = p_no_symp.toFixed(3);
+    document.getElementById("p-ns-prior-2").value = p_no_symp.toFixed(3);
+
+    document.getElementById("p-s-flu-likelihood").value = jointFluSymptoms.toFixed(3);
+    document.getElementById("p-s-flu-prior").value = (jointFluSymptoms / p_flu).toFixed(3);
+    document.getElementById("p-s-flu-likelihood-2").value = jointFluSymptoms.toFixed(3);
+    document.getElementById("p-flu-s-posterior").value = (jointFluSymptoms / p_symp).toFixed(3);
+    document.getElementById("p-s-flu-flu-prior").value = ( (jointFluSymptoms / p_flu)*p_flu ).toFixed(3);
+    document.getElementById("p-flu-s-bayes").value = (((jointFluSymptoms / p_flu)*p_flu )/ p_symp ).toFixed(3);
+    document.getElementById("p-flu-prior").value = p_flu.toFixed(3);
+    document.getElementById("p-s-prior-3").value = p_symp.toFixed(3);
+    document.getElementById("p-s-prior-4").value = p_symp.toFixed(3);
+
+    document.getElementById("p-ns-flu-likelihood").value = jointFluNS.toFixed(3);
+    document.getElementById("p-ns-flu-prior").value = (jointFluNS / p_flu).toFixed(3);
+    document.getElementById("p-ns-flu-likelihood-2").value = jointFluNS.toFixed(3);
+    document.getElementById("p-flu-ns-posterior").value = (jointFluNS / p_no_symp).toFixed(3);
+    document.getElementById("p-ns-flu-flu-prior").value = ( (jointFluNS / p_flu)*p_flu ).toFixed(3);
+    document.getElementById("p-flu-ns-bayes").value = (((jointFluNS / p_flu)*p_flu )/ p_no_symp ).toFixed(3);
+    document.getElementById("p-flu-prior-2").value = p_flu.toFixed(3);
+    document.getElementById("p-ns-prior-3").value = p_no_symp.toFixed(3);
+    document.getElementById("p-ns-prior-4").value = p_no_symp.toFixed(3);
+
+
+
+
+
+}
+
+
+	  </script>
+	  </body>
+	  </html>
